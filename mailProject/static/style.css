@@ -1,0 +1,9 @@
+.main{
+    display: flex;
+}
+
+.leftbar{
+    flex: 0 0 20%;
+    background: #000000;
+
+}

@@ -1,0 +1,15 @@
+{% extends "parts/base.html" %}
+
+{% block content %}
+	<div class="main-content py-4">
+		<h1 class="h3 text-center pb-3">Сообщение</h1>
+		{% if request.user.is_authenticated %}
+			<div class="container p-4 mail-details">
+				<h5>Отправитель: {{ mail.sender }}</h5>
+				<h6>Тема: {{ mail.theme }}</h6>
+				<p>{{ mail.description }}</p>
+				<p>Файл: <a href="/media/{{ mail.file }}" download>Скачать</a</p>
+			</div>
+		{% endif %}
+	</div>
+{% endblock content %}

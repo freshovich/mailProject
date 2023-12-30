@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta name="vie wport" content="width=device-width, initial-scale=1.0"/>
+
+	<style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        .main {
+            display: flex;
+            gap: 30px;
+            min-height: 100vh;
+        }
+
+        .leftbar {
+            flex: 0 0 20%;
+            background: #3a3737;
+            padding-left: 30px;
+            min-height: 100%;
+        }
+
+        .leftbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .leftbar a:hover {
+            color: #e39938;
+        }
+
+        .content {
+            width: 100%;
+            margin-right: 20px;
+        }
+
+        .mail_block, .mail_header {
+            display: grid;
+            grid-template-columns: 2fr 4fr 5fr;
+            align-items: center;
+            gap: 20px;
+            padding-left: 10px;
+
+        }
+
+        .mail_block:nth-child(2n+1) {
+            background: #eecea5;
+        }
+
+        .mail_block a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+        }
+
+        .mail_block:hover {
+            background: #e5d97e;
+            color: white;
+            cursor: pointer;
+			font-weight: 700;
+        }
+
+        .head {
+            display: flex;
+            color: white;
+			gap: 20px;
+			align-items: center;
+        }
+
+		.head__text{
+			color: white;
+			font-size: 30px;
+            font-weight: 500;
+		}
+	</style>
+</head>
+
+<body>
+<div class="main">
+	<div class="leftbar">
+		<div class="head">
+			<p><img src="/media/mail.png" alt="" width="50"></p>
+			<p class="head__text">Почтовый сервис</p>
+		</div>
+		<p><a href="{% url 'main' %}">Главная</a></p>
+		<p><a href="{% url 'login' %}">Вход</a></p>
+		{% if request.user.is_authenticated %}
+		<p><a href="{% url 'logout' %}">Выход</a></p>
+		<p><a href="{% url 'mail_add' %}">Отправить письмо</a></p>
+		{% endif %}
+	</div>
+	<div class="content">
+		<h1>Ваши сообщения</h1>
+		{% if request.user.is_authenticated %}
+		<div class="mail_header">
+			<h3>От кого</h3>
+			<h3>Тема</h3>
+			<h3>Сообщение</h3>
+		</div>
+		{% for mail in mails %}
+		<div class="mail_block">
+			<h4>{{ mail.sender }}</h4>
+			<p>
+				<a href="{% url 'detail' mail.pk %}">{{ mail.theme }}</a>
+			</p>
+			<p>{{ mail.description }}</p>
+		</div>
+		{% endfor %}
+		<h3>Всего сообщений: {{ mails_count }}</h3>
+		{% endif %}
+	</div>
+</div>
+
+
+</body>
+</html>

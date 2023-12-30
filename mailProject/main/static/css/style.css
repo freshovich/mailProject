@@ -1,0 +1,47 @@
+body {
+    background: #f7fafe;
+}
+
+.main-logo {
+    height: 25px;
+}
+
+.main-content {
+    background: #edf4fe;
+    height: 100vh;
+    color: #4a4b4c;
+}
+
+.mail-card {
+    background: #edf4fe;
+    border-radius: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.mail-link {
+    text-decoration: none;
+}
+
+.mail-details {
+    background: #f7fafe;
+}
+
+.mail-card:hover {
+    background: #f7fafe;
+}
+
+.mail-card:not(:last-child) {
+    border-bottom: 0;
+}
+
+.mail-description {
+    color: #aaaeb4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mail-text-area {
+    height: 150px;
+}

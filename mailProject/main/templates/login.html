@@ -1,0 +1,28 @@
+{% extends "parts/base.html" %}
+
+{% block content %}
+    <section class="container main-content d-flex justify-content-center align-items-center">
+        <form action="" method="post">
+            <h1 class="h3 text-center">Вход</h1>
+            {% if user.is_authenticated %}
+                <p class="text-center">Вы уже выполнили вход</p>
+            {% else %}
+                <div class="login">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Логин</label>
+                        <input type="text" class="form-control form-control-lg border-left-0" id="id_username" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control form-control-lg border-left-0" id="id_password" name="password">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-secondary" type="submit">Вход</button>
+                        <a class="btn btn-light" href="{% url 'password-reset' %}">Забыли пароль</a>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </section>
+{% endblock content %}

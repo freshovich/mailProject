@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        .main {
+            display: flex;
+            gap: 30px;
+            min-height: 100vh;
+        }
+
+        .leftbar {
+            flex: 0 0 20%;
+            background: #3a3737;
+            padding-left: 30px;
+            min-height: 100%;
+        }
+
+        .leftbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .leftbar a:hover {
+            color: #e39938;
+        }
+
+        .content {
+            width: 100%;
+            margin-right: 20px;
+        }
+
+        .content input, .content select {
+            width: 100%;
+            font-size: 20px;
+        }
+
+        .sub_btn {
+            border: none;
+            outline: none;
+            background: #e39938;
+            color: white;
+            height: 50px;
+            width: 200px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 25px;
+        }
+
+        .sub_btn:hover {
+            background: #780f85;
+        }
+
+        .head {
+            display: flex;
+            color: white;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .head__text {
+            color: white;
+            font-size: 30px;
+            font-weight: 500;
+        }
+	</style>
+</head>
+
+<body>
+<div class="main">
+	<div class="leftbar">
+		<div class="head">
+			<p><img src="/media/mail.png" alt="" width="50"></p>
+			<p class="head__text">Почтовый сервис</p>
+		</div>
+		<p><a href="{% url 'main' %}">Главная</a></p>
+		<p><a href="{% url 'login' %}">Вход</a></p>
+		{% if request.user.is_authenticated %}
+		<p><a href="{% url 'logout' %}">Выход</a></p>
+		<p><a href="{% url 'mail_add' %}">Отправить письмо</a></p>
+		{% endif %}
+	</div>
+	<div class="content">
+		<h2>Выход</h2>
+		<p>Вы успешно вышли с сайта</p>
+		<p><a href="{% url 'main' %}">На главную</a></p>
+	</div>
+</div>
+
+
+</body>
+</html>

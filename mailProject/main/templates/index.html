@@ -1,0 +1,35 @@
+{% extends "parts/base.html" %}
+
+{% block content %}
+<section class="main-content py-4">
+	{% if not request.user.is_authenticated %}
+		<h1 class="h4 text-center">Войдите в аккаунт, чтобы начать пользоваться почтовым сервисом</h1>
+	{% else %}
+		<h1 class="h4 text-center mb-4">Ваши сообщения</h1>
+		<div class="mx-3">Всего сообщений: {{ mails_count }}</div>
+		{% for mail in mails %}
+			<a class="mail-link" href="{% url 'detail' mail.id %}">
+				<div class="card mail-card px-3">
+					<div class="card-body py-3">
+						<h5 class="card-title">{{ mail.sender }}</h5>
+						<h6 class="card-subtitle text-body-secondary">{{ mail.theme }}</h6>
+						<p class="card-text mail-description">{{ mail.description }}</p>
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+
+	{% endif %}
+</section>
+ <script defer>
+		document.addEventListener('DOMContentLoaded', function () {
+			const mailBlocks = document.querySelectorAll('.mail_block');
+
+			mailBlocks.forEach((block) => {
+				block.addEventListener('click', function () {
+					this.classList.toggle('expand');
+				});
+			});
+		});
+</script>
+{% endblock content %}

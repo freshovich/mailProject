@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        .main {
+            display: flex;
+            gap: 30px;
+            min-height: 100vh;
+        }
+
+        .leftbar {
+            flex: 0 0 20%;
+            background: #780f85;
+            padding-left: 30px;
+            min-height: 100%;
+        }
+
+        .leftbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .leftbar a:hover {
+            color: #e39938;
+        }
+
+        .content {
+            width: 100%;
+            margin-right: 20px;
+        }
+
+        .content input, .content select{
+            width: 100%;
+			font-size: 20px;
+		}
+
+		.sub_btn{
+			border: none;
+			outline: none;
+			background: #e39938;
+			color: white;
+            height: 50px;
+            width: 200px;
+			border-radius: 10px;
+            cursor: pointer;
+			font-size: 25px;
+		}
+
+		.sub_btn:hover{
+			background: #780f85;
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+    <div class="leftbar">
+		<p>
+			<img src="/media/mail.png" alt="">
+		</p>
+		<p><a href="{% url 'main' %}">Главная</a></p>
+		<p><a href="{% url 'register' %}">Регистрация</a></p>
+		<p><a href="{% url 'login' %}">Вход</a></p>
+		{% if request.user.is_authenticated %}
+		<p><a href="{% url 'logout' %}">Выход</a></p>
+		<p><a href="{% url 'mail_add' %}">Отправить письмо</a></p>
+		{% endif %}
+	</div>
+    <div class="content">
+        <h2>Вход</h2>
+
+        {% if user.is_authenticated %}
+        <p>Вы уже выполнили вход</p>
+        {% else %}
+        <div class="">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="sub_btn" type="submit">Регистрация</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
